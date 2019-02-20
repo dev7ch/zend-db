@@ -12,6 +12,7 @@ namespace Zend\Db\Sql;
 use Zend\Db\Adapter\ParameterContainer;
 use Zend\Db\Adapter\Platform\PlatformInterface;
 use Zend\Db\Adapter\Driver\DriverInterface;
+use Zend\Db\Adapter\Driver\Pdo\Pdo;
 use Zend\Stdlib\PriorityList;
 
 /**
@@ -186,14 +187,39 @@ class Update extends AbstractPreparableSql
         ParameterContainer $parameterContainer = null
     ) {
         $setSql = [];
+<<<<<<< HEAD
         $pIndex = 0;
 
+=======
+        $i      = 0;
+>>>>>>> master
         foreach ($this->set as $column => $value) {
-            $prefix = $platform->quoteIdentifier($column) . ' = ';
+            $prefix = $this->resolveColumnValue(
+                [
+                    'column'       => $column,
+                    'fromTable'    => '',
+                    'isIdentifier' => true,
+                ],
+                $platform,
+                $driver,
+                $parameterContainer,
+                'column'
+            );
+            $prefix .= ' = ';
             if (is_scalar($value) && $parameterContainer) {
+<<<<<<< HEAD
                 $parameterName = 'set' . $pIndex++;
                 $setSql[] = $prefix . $driver->formatParameterName($parameterName);
                 $parameterContainer->offsetSet($parameterName, $value);
+=======
+                // use incremental value instead of column name for PDO
+                // @see https://github.com/zendframework/zend-db/issues/35
+                if ($driver instanceof Pdo) {
+                    $column = 'c_' . $i++;
+                }
+                $setSql[] = $prefix . $driver->formatParameterName($column);
+                $parameterContainer->offsetSet($column, $value);
+>>>>>>> master
             } else {
                 $setSql[] = $prefix . $this->resolveColumnValue(
                     $value,
