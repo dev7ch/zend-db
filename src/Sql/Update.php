@@ -187,12 +187,7 @@ class Update extends AbstractPreparableSql
         ParameterContainer $parameterContainer = null
     ) {
         $setSql = [];
-<<<<<<< HEAD
-        $pIndex = 0;
-
-=======
         $i      = 0;
->>>>>>> master
         foreach ($this->set as $column => $value) {
             $prefix = $this->resolveColumnValue(
                 [
@@ -207,11 +202,6 @@ class Update extends AbstractPreparableSql
             );
             $prefix .= ' = ';
             if (is_scalar($value) && $parameterContainer) {
-<<<<<<< HEAD
-                $parameterName = 'set' . $pIndex++;
-                $setSql[] = $prefix . $driver->formatParameterName($parameterName);
-                $parameterContainer->offsetSet($parameterName, $value);
-=======
                 // use incremental value instead of column name for PDO
                 // @see https://github.com/zendframework/zend-db/issues/35
                 if ($driver instanceof Pdo) {
@@ -219,7 +209,6 @@ class Update extends AbstractPreparableSql
                 }
                 $setSql[] = $prefix . $driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $value);
->>>>>>> master
             } else {
                 $setSql[] = $prefix . $this->resolveColumnValue(
                     $value,

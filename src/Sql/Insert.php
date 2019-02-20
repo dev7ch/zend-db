@@ -181,20 +181,12 @@ class Insert extends AbstractPreparableSql
 
         $columns = [];
         $values  = [];
-<<<<<<< HEAD
-        $cIndex = 0;
-=======
         $i       = 0;
->>>>>>> master
 
         foreach ($this->columns as $column => $value) {
             $columns[] = $platform->quoteIdentifier($column);
             $parameterName = 'column' . $cIndex++;
             if (is_scalar($value) && $parameterContainer) {
-<<<<<<< HEAD
-                $values[] = $driver->formatParameterName($parameterName);
-                $parameterContainer->offsetSet($parameterName, $value);
-=======
                 // use incremental value instead of column name for PDO
                 // @see https://github.com/zendframework/zend-db/issues/35
                 if ($driver instanceof Pdo) {
@@ -202,7 +194,6 @@ class Insert extends AbstractPreparableSql
                 }
                 $values[] = $driver->formatParameterName($column);
                 $parameterContainer->offsetSet($column, $value);
->>>>>>> master
             } else {
                 $values[] = $this->resolveColumnValue(
                     $value,
