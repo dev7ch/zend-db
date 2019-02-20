@@ -1,6 +1,6 @@
 {
-    "name": "zendframework/zend-db",
-    "description": "Database abstraction layer, SQL abstraction, result set abstraction, and RowDataGateway and TableDataGateway implementations",
+    "name": "dev7ch/zend-db",
+    "description": "Trimmed for Directus - Database abstraction layer, SQL abstraction, result set abstraction, and RowDataGateway and TableDataGateway implementations",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf",
